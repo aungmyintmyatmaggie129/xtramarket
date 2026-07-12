@@ -1,0 +1,176 @@
+<!--Product List-->
+<div class="w-full px-2 py-4 overflow-y-auto">
+    <!--Product List-->
+    <div class="p-10 grid grid-cols-1 sm:grid-cols-2 gap-8 gap-y-10">
+
+        <% cardData.forEach(item=> { %>
+            <form action="/cart/addToCart" method="post">
+                <div class="group w-full bg-[#FEFEFE] rounded-tl-3xl rounded-br-3xl shadow-md flex flex-col justify-between items-center cursor-pointer">
+                    <div class="w-full flex flex-col justify-around items-start py-4">
+                        <div class="overflow-hidden ml-4  flex justify-center items-center">
+                            <img class="w-60 md:w-60 lg:w-64 xl:w-72 transition-transform group-hover:scale-110 duration-300"
+                                src=<%=item.img %> alt="product1">
+                            <input type="hidden" name="img" value=<%=item.img %>>
+                        </div>
+                        <div class="ml-6 mt-3 capitalize group-hover:text-[#00E281] transition-all duration-300">
+                            <h3 class="text-lg sm:text-xl lg:text-2xl font-bold">
+                                <%= item.productName %>
+                            </h3>
+                            <input type="hidden" name="productFullName" value=<%=item.productFullName %>>
+                            <h3 class="text-lg sm:text-xl lg:text-2xl font-bold">
+                                <%= item.productSecondName %>
+                            </h3>
+                            <span class="font-thin text-sm text-[#364C5D] group-hover:text-[#00E281] transition-all duration-300">
+                                <%= item.productType %>
+                            </span>
+                        </div>
+                        <div class="ml-6 mt-2 flex items-center gap-2">
+                            <div>
+                                <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                            </div>
+                            <span class="text-lg sm:text-xl font-medium ml-2">$<%= item.price %></span>
+                            <input type="hidden" name="price" value=<%=item.price %>>
+                        </div>
+                    </div>
+
+                    <!-- Float Button Section-->
+                    <div class="relative w-50 h-0 hidden lg:flex justify-center items-center">
+                        <div class="absolute flex flex-col justify-center items-end gap-2 -top-100 -right-20">
+                            <div class="group/wish flex justify-between items-center gap-4">
+                                <span class="hidden px-2 py-1 bg-[#00E281] rounded-full text-sm translate-x-5 transition-all duration-200 group-hover/wish:flex group-hover/wish:translate-x-0 group-hover/wish:text-black">
+                                    Add to wishlist
+                                </span>
+                                <a href="./index.html" class="group/wish1 px-3 py-2 border border-[#DDDDDD] rounded-full transition-all duration-300 hover:text-[#00E2A1] hover:border-[#00E2A1] bg-white">
+                                    <i class="fa-regular fa-heart"></i>
+                                </a>
+                            </div>
+                            <div class="group/compare flex justify-between items-center gap-4">
+                                <span class="opacity-0 px-2 py-1 bg-[#00E281] rounded-full text-sm translate-x-5 transition-all duration-200 group-hover/compare:opacity-100 group-hover/compare:translate-x-0 group-hover/compare:text-black">
+                                    Add to compare
+                                </span>
+                                <a href="./index.html" class="px-3 py-2 border border-[#DDDDDD] rounded-full transition-all duration-300 hover:text-[#00E2A1] hover:border-[#00E2A1] bg-white">
+                                    <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                                </a>
+                            </div>
+                            <div class="openPopupBtn group/view flex justify-between items-center gap-4">
+                                <span class="opacity-0 px-2 py-1 bg-[#00E281] rounded-full text-sm translate-x-5 transition-all duration-200 group-hover/view:opacity-100 group-hover/view:translate-x-0 group-hover/view:text-black">
+                                    Quick view
+                                </span>
+                                <button type="button" class="px-3 py-2 border border-[#DDDDDD] rounded-full transition-all duration-300 hover:text-[#00E2A1] hover:border-[#00E2A1] bg-white">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </div>
+
+                            <!-- Quick View Popup -->
+                            <div class="popup">
+                                <div class="popup-box">
+                                    <div class="popupBtn-container">
+                                        <button type="button" class="closePopupBtn">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>
+                                    </div>
+                                    <div class="popup-container">
+                                        <img src=<%=item.img %> alt="Product" class="src">
+                                        <div class="content">
+                                            <div class="mt-6 sm:mt-10 flex flex-col justify-center items-start gap-2">
+                                                <h2 class="text-2xl sm:text-4xl font-bold capitalize">
+                                                    <%= item.productName %> <%= item.productSecondName %>
+                                                </h2>
+                                                <a href="#" class="text-sm">View full product details <i class="fa-solid fa-arrow-right"></i></a>
+                                                <!-- Rating -->
+                                                <div class="flex justify-center items-center gap-1">
+                                                    <span class="px-[6px] border border-[#F1F2F6] rounded-md text-sm">4.5</span>
+                                                    <div class="select-none">
+                                                        <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                        <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                        <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                        <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                        <i class="fa-solid fa-star-half-stroke text-[#FFBB00] text-sm"></i>
+                                                    </div>
+                                                    <span class="text-sm">(4 Rating)</span>
+                                                </div>
+                                                <!-- Price and Purchase Section -->
+                                                <div class="flex flex-col justify-center items-start gap-4 w-full">
+                                                    <h2 class="text-2xl sm:text-3xl font-bold text-[#00E281]">$<%= item.price %></h2>
+                                                    <p class="max-h-[100px] overflow-hidden text-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</p>
+                                                    <!-- Add to Cart -->
+                                                    <div class="w-full flex flex-col sm:flex-row justify-around items-center gap-3">
+                                                        <div class="flex justify-around items-center gap-2">
+                                                            <button type="button" class="btn-minus px-3 sm:px-4 py-2.5 sm:py-3 text-[#00E281] bg-[#F6F6F6] rounded-full transition-all duration-300 hover:text-[#122E40] hover:bg-[#00E281]">
+                                                                <i class="fa-solid fa-minus text-sm"></i>
+                                                            </button>
+                                                            <input type="text" min="1" max="99" name="qty" value="1"
+                                                                class="product w-16 sm:w-20 h-9 sm:h-10 text-center text-base font-bold outline-none border border-[#7F7F7F] rounded-full transition-all duration-300 focus:border-[#00E281]">
+                                                            <button type="button" class="btn-plus px-3 sm:px-4 py-2.5 sm:py-3 text-[#00E281] bg-[#F6F6F6] rounded-full transition-all duration-300 hover:text-[#122E40] hover:bg-[#00E281]">
+                                                                <i class="fa-solid fa-plus text-sm"></i>
+                                                            </button>
+                                                        </div>
+                                                        <button class="w-full sm:w-auto px-6 sm:px-10 py-2.5 text-sm font-bold bg-[#00E281] rounded-full transition duration-300 hover:text-[#00E281] hover:bg-[#122E40]">
+                                                            <i class="fa-solid fa-cart-shopping"></i> Add to cart
+                                                        </button>
+                                                    </div>
+                                                    <!-- People added -->
+                                                    <span class="w-full py-3 text-[#777777] bg-[#F6F6F6] text-center rounded-2xl text-sm">
+                                                        <i class="fa-solid fa-cart-shopping"></i> <strong>1000</strong> people have added this product to their cart
+                                                    </span>
+                                                    <!-- Speak to specialist -->
+                                                    <a href="javascript:void(0)" class="group/phone w-full bg-[#F6F6F6] border-2 border-[#F4F4F4] rounded-2xl flex justify-start items-center gap-3 py-3 px-4 transition-all duration-300 hover:border-[#00E281]">
+                                                        <div class="ml-2">
+                                                            <i class="fa-solid fa-square-phone text-4xl sm:text-5xl text-[#00E281]"></i>
+                                                        </div>
+                                                        <div class="flex flex-col justify-center items-start">
+                                                            <p class="text-xs sm:text-sm text-[#C2C2C2] transition-all duration-300 group-hover/phone:text-[#00E281]">Need help choosing the right product?</p>
+                                                            <p class="text-xs sm:text-sm font-bold text-[#6A6A6A] transition-all duration-300 group-hover/phone:text-[#00E281]">Speak to product specialist at 1-312-800-000</p>
+                                                        </div>
+                                                    </a>
+                                                    <hr class="w-full text-[#C2C2C2]">
+                                                    <!-- Product Detail Table -->
+                                                    <div class="w-full flex flex-col sm:flex-row justify-around items-start sm:items-center gap-4">
+                                                        <table class="product-table text-sm">
+                                                            <tr>
+                                                                <td>Brand</td>
+                                                                <td>Your Brand Name</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>SKU</td>
+                                                                <td>SKU_19**</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Status</td>
+                                                                <td>99 in stock</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Tags</td>
+                                                                <td class="capitalize"><%= item.productFullName.replaceAll("_", " ") %></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Categories</td>
+                                                                <td><%= item.productType %></td>
+                                                            </tr>
+                                                        </table>
+                                                        <img src="./image/brand-xtra-2.jpg" alt="xtratheme" class="w-24 h-12 object-contain">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add to Cart hover button -->
+                    <div class="relative w-full h-10 flex justify-center items-center transition-all duration-300 mb-2">
+                        <button class="absolute px-5 py-2.5 text-sm font-bold bg-[#00E281] rounded-full -bottom-5 transition duration-300 lg:opacity-0 group-hover:opacity-100 hover:text-[#00E281] hover:bg-[#122E40] whitespace-nowrap">
+                            <i class="fa-solid fa-cart-shopping"></i> Add to cart
+                        </button>
+                    </div>
+                </div>
+            </form>
+        <% }); %>
+    </div>
+</div>

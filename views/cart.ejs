@@ -1,0 +1,560 @@
+<!-- Title Section-->
+<div class="w-full h-24 sm:h-32 lg:h-40 bg-[#FDFDFE] flex justify-center items-center px-4">
+    <div class="w-full max-w-7xl h-full text-xl font-bold flex justify-between items-center">
+        <h2>Cart</h2>
+        <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+    </div>
+</div>
+
+<!-- This will show if no card you are selected -->
+<% if(!posts.length){ %>
+    <!-- Empty Shop Cart  -->
+    <div class="w-full py-16 sm:h-130 flex flex-col justify-center items-center select-none gap-4 px-4 text-center">
+        <img src="./image/shopping-cart.png" alt="Shopping-Cart" class="w-40 sm:w-56 lg:w-70">
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold">Looks like your cart is empty!</h2>
+        <p class="text-lg sm:text-xl lg:text-2xl font-md text-[#808080]">Time to start your shopping</p>
+    </div>
+
+    <!-- Suggest Product List Box -->
+    <div class="w-full flex flex-col justify-start items-center gap-8 sm:gap-10 px-4 sm:px-6 py-8">
+        <!-- Card Holder List Container -->
+        <div
+            class="w-full max-w-7xl bg-[#ECEDF2] rounded-4xl flex flex-col justify-center items-center py-8 px-4 sm:px-6 gap-6">
+            <!-- Interested Suggestion Box -->
+            <div class="w-full max-w-3xl h-12 sm:h-15 bg-[#04E181] rounded-full flex justify-center items-center">
+                <h3 class="text-base sm:text-xl font-bold">You may be interested in ...</h3>
+            </div>
+            <!--    Products Grid -->
+            <div class="w-full flex justify-center items-center px-2 sm:px-4 lg:px-8 py-4 sm:py-10">
+                <div
+                    class="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+                    <% cardData.forEach(item=> { %>
+                        <form action="/cart/addToCart" method="post">
+                            <div
+                                class="group bg-[#FEFEFE] rounded-tl-3xl rounded-br-3xl shadow-md flex flex-col justify-between items-center cursor-pointer relative">
+                                <div class="w-full flex flex-col justify-around items-start pt-4 pb-2">
+                                    <!-- Product Image -->
+                                    <div class="overflow-hidden ml-4">
+                                        <img class="w-40 sm:w-48 transition-transform group-hover:scale-110 duration-300"
+                                            src=<%=item.img %> alt="product">
+                                        <input type="hidden" name="img" value=<%=item.img %>>
+                                    </div>
+                                    <!-- Product Name -->
+                                    <div
+                                        class="ml-6 mt-3 capitalize group-hover:text-[#00E281] transition-all duration-300">
+                                        <h3 class="text-lg sm:text-xl font-bold">
+                                            <%= item.productName %>
+                                        </h3>
+                                        <input type="hidden" name="productFullName" value=<%=item.productFullName %>>
+                                        <h3 class="text-lg sm:text-xl font-bold">
+                                            <%= item.producSecondtName %>
+                                        </h3>
+                                        <span
+                                            class="font-thin text-sm text-[#364C5D] group-hover:text-[#00E281] transition-all duration-300">
+                                            <%= item.productType %>
+                                        </span>
+                                    </div>
+                                    <!-- Stars + Price -->
+                                    <div class="ml-6 mt-2 flex items-center gap-2">
+                                        <div>
+                                            <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                            <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                            <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                            <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                            <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                        </div>
+                                        <span class="text-lg font-medium">$<%= item.price %></span>
+                                        <input type="hidden" name="price" value=<%=item.price %>>
+                                    </div>
+                                </div>
+
+                                <!-- Float Action Buttons -->
+                                <div class="absolute top-4 right-4 flex flex-col items-end gap-2">
+                                    <div class="group/wish flex justify-end items-center gap-2">
+                                        <span
+                                            class="hidden scale-0 px-2 py-1 bg-[#00E281] rounded-full text-xs transition-all duration-200 group-hover/wish:flex group-hover/wish:scale-100 group-hover/wish:text-black whitespace-nowrap">Add
+                                            to wishlist</span>
+                                        <a href="./index.html"
+                                            class="px-2.5 py-2 border border-[#DDDDDD] rounded-full transition-all duration-300 hover:text-[#00E2A1] hover:border-[#00E2A1] text-sm bg-white">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </a>
+                                    </div>
+                                    <div class="group/compare flex justify-end items-center gap-2">
+                                        <span
+                                            class="opacity-0 px-2 py-1 bg-[#00E281] rounded-full text-xs transition-all duration-200 group-hover/compare:opacity-100 group-hover/compare:text-black whitespace-nowrap">Add
+                                            to compare</span>
+                                        <a href="./index.html"
+                                            class="px-2.5 py-2 border border-[#DDDDDD] rounded-full transition-all duration-300 hover:text-[#00E2A1] hover:border-[#00E2A1] text-sm bg-white">
+                                            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                                        </a>
+                                    </div>
+                                    <div class="openPopupBtn group/view flex justify-end items-center gap-2">
+                                        <span
+                                            class="opacity-0 px-2 py-1 bg-[#00E281] rounded-full text-xs transition-all duration-200 group-hover/view:opacity-100 group-hover/view:text-black whitespace-nowrap">Quick
+                                            view</span>
+                                        <button type="button"
+                                            class="px-2.5 py-2 border border-[#DDDDDD] rounded-full transition-all duration-300 hover:text-[#00E2A1] hover:border-[#00E2A1] text-sm bg-white">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Quick View Popup -->
+                                <div class="popup">
+                                    <div class="popup-box">
+                                        <div class="popupBtn-container">
+                                            <button type="button" class="closePopupBtn"><i
+                                                    class="fa-solid fa-xmark"></i></button>
+                                        </div>
+                                        <div class="popup-container">
+                                            <img src=<%=item.img %> alt="" class="src">
+                                            <div class="content">
+                                                <div class="mt-10 flex flex-col justify-center items-start gap-2">
+                                                    <h2 class="text-2xl sm:text-4xl font-bold capitalize">
+                                                        <%= item.productName %>
+                                                            <%= item.productSecondName %>
+                                                    </h2>
+                                                    <a href="#" class="text-sm">View full product details <i
+                                                            class="fa-solid fa-arrow-right"></i></a>
+                                                    <div class="flex justify-center items-center gap-1">
+                                                        <span
+                                                            class="px-1.5 border border-[#F1F2F6] rounded-md text-sm">4.5</span>
+                                                        <div class="select-none">
+                                                            <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                            <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                            <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                            <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                            <i
+                                                                class="fa-solid fa-star-half-stroke text-[#FFBB00] text-sm"></i>
+                                                        </div>
+                                                        <span class="text-sm">(4 Rating)</span>
+                                                    </div>
+                                                    <div class="flex flex-col justify-center items-start gap-4 w-full">
+                                                        <h2 class="text-2xl sm:text-3xl font-bold text-[#00E281]">$<%=
+                                                                item.price %>
+                                                        </h2>
+                                                        <p class="max-h-[100px] overflow-hidden text-sm">Pellentesque
+                                                            habitant morbi tristique senectus et netus et malesuada
+                                                            fames ac turpis egestas. Vestibulum tortor quam, feugiat
+                                                            vitae, ultricies eget, tempor sit amet, ante.</p>
+                                                        <div
+                                                            class="w-full flex flex-col sm:flex-row justify-around items-center gap-3">
+                                                            <div class="flex justify-around items-center gap-2">
+                                                                <button type="button"
+                                                                    class="btn-minus px-3 py-2.5 text-[#00E281] bg-[#F6F6F6] rounded-full transition-all duration-300 hover:text-[#122E40] hover:bg-[#00E281]">
+                                                                    <i class="fa-solid fa-minus text-sm"></i>
+                                                                </button>
+                                                                <input type="text" min="1" max="99" name="qty" value="1"
+                                                                    class="product w-20 h-9 text-center text-base font-bold outline-none border border-[#7F7F7F] rounded-full transition-all duration-300 focus:border-[#00E281]">
+                                                                <button type="button"
+                                                                    class="btn-plus px-3 py-2.5 text-[#00E281] bg-[#F6F6F6] rounded-full transition-all duration-300 hover:text-[#122E40] hover:bg-[#00E281]">
+                                                                    <i class="fa-solid fa-plus text-sm"></i>
+                                                                </button>
+                                                            </div>
+                                                            <button type="submit"
+                                                                class="w-full sm:w-auto px-6 py-2.5 text-sm font-bold bg-[#00E281] rounded-full transition duration-300 hover:text-[#00E281] hover:bg-[#122E40]">
+                                                                <i class="fa-solid fa-cart-shopping mr-1"></i> Add to
+                                                                cart
+                                                            </button>
+                                                        </div>
+                                                        <span
+                                                            class="w-full py-3 text-[#777777] bg-[#F6F6F6] text-center rounded-2xl text-sm">
+                                                            <i class="fa-solid fa-cart-shopping"></i>
+                                                            <strong>1000</strong> people have added this product to
+                                                            their cart
+                                                        </span>
+                                                        <a href="javascript:void(0)"
+                                                            class="group/phone w-full bg-[#F6F6F6] border-2 border-[#F4F4F4] rounded-2xl flex justify-start items-center gap-4 py-4 px-4 transition-all duration-300 hover:border-[#00E281]">
+                                                            <i
+                                                                class="fa-solid fa-square-phone text-5xl text-[#00E281]"></i>
+                                                            <div class="flex flex-col justify-center items-start">
+                                                                <p
+                                                                    class="text-xs text-[#C2C2C2] transition-all duration-300 group-hover/phone:text-[#00E281]">
+                                                                    Need help choosing the right product?</p>
+                                                                <p
+                                                                    class="text-sm font-bold text-[#6A6A6A] transition-all duration-300 group-hover/phone:text-[#00E281]">
+                                                                    Speak to product specialist at 1-312-800-000</p>
+                                                            </div>
+                                                        </a>
+                                                        <hr class="w-full text-[#C2C2C2]">
+                                                        <div
+                                                            class="w-full flex flex-col sm:flex-row justify-around items-start sm:items-center gap-4">
+                                                            <table class="product-table text-sm">
+                                                                <tr>
+                                                                    <td>Brand</td>
+                                                                    <td>Your Brand Name</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>SKU</td>
+                                                                    <td>SKU_19**</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Status</td>
+                                                                    <td>99 in stock</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Tags</td>
+                                                                    <td>Angus Burgers</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Categories</td>
+                                                                    <td><a href="/">Home</a> <a href="/newproduct">New
+                                                                            Product</a></td>
+                                                                </tr>
+                                                            </table>
+                                                            <img src="./image/brand-xtra-2.jpg" alt="xtratheme"
+                                                                class="w-24 h-12 object-contain">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Add to Cart Button (hover) -->
+                                <div
+                                    class="relative w-full h-10 flex justify-center items-center transition-all duration-300 mb-2">
+                                    <button type="submit"
+                                        class="absolute px-5 py-2.5 text-sm font-bold bg-[#00E281] rounded-full -bottom-5 transition duration-300 lg:opacity-0 group-hover:opacity-100 hover:text-[#00E281] hover:bg-[#122E40] whitespace-nowrap">
+                                        <i class="fa-solid fa-cart-shopping mr-1"></i> Add to cart
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <% }); %>
+                </div>
+            </div>
+        </div>
+
+        <!-- Return To NewProduct Page -->
+        <div class="w-full max-w-7xl h-20 flex justify-center items-center">
+            <div class="w-full h-10 flex justify-center items-center transition-all duration-300 mb-2">
+                <a class="px-6 py-3.5 text-md font-bold bg-[#00E281] rounded-full transition duration-300 hover:text-[#00E281] hover:bg-[#122E40] whitespace-nowrap"
+                    href="/newproduct">Return To Shop</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- This is will show if you choose or added product to your cart  -->
+    <% }else{ %>
+
+        <!-- Shopping Process Section -->
+        <div class="w-full py-8 sm:h-50 flex flex-col justify-center items-center select-none px-4">
+            <div class="w-full max-w-4xl flex flex-wrap justify-center sm:justify-around items-center gap-4 sm:gap-2">
+                <div class="flex justify-center items-center gap-2">
+                    <span
+                        class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#00E281] flex justify-center items-center text-sm"><i
+                            class="fa-solid fa-1"></i></span>
+                    <h3 class="text-xl sm:text-3xl font-md">Shopping cart</h3>
+                </div>
+                <i class="fa-solid fa-arrow-right hidden sm:block"></i>
+                <div class="flex justify-center items-center gap-2">
+                    <span
+                        class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#00E281] flex justify-center items-center text-sm"><i
+                            class="fa-solid fa-2"></i></span>
+                    <h3 class="text-xl sm:text-3xl font-md">Checkout details</h3>
+                </div>
+                <i class="fa-solid fa-arrow-right hidden sm:block"></i>
+                <div class="flex justify-center items-center gap-2">
+                    <span
+                        class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#00E281] flex justify-center items-center text-sm"><i
+                            class="fa-solid fa-3"></i></span>
+                    <h3 class="text-xl sm:text-3xl font-md">Order complete</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Detail Section -->
+        <div class="w-full flex flex-col justify-center items-center px-2 sm:px-4 lg:px-6 overflow-x-auto">
+            <!-- Product Detail Table -->
+            <table class="cart-table w-full max-w-7xl border border-[#CCCCCC] rounded-2xl text-sm sm:text-base">
+                <thead class="hidden sm:table-header-group">
+                    <tr class="h-16 sm:h-20 border border-[#CCCCCC] bg-[#F6F6F6]">
+                        <td class="w-20 sm:w-30 text-sm sm:text-lg font-bold border border-[#CCCCCC] text-center">Cancel
+                        </td>
+                        <td class="text-sm sm:text-lg font-bold border border-[#CCCCCC] text-center">Product</td>
+                        <td class="text-sm sm:text-lg font-bold border border-[#CCCCCC] text-center">Product Name</td>
+                        <td class="text-sm sm:text-lg font-bold border border-[#CCCCCC] text-center">Price</td>
+                        <td class="text-sm sm:text-lg font-bold border border-[#CCCCCC] text-center">Quantity</td>
+                        <td class="text-sm sm:text-lg font-bold border border-[#CCCCCC] text-center">Subtotal</td>
+                    </tr>
+                </thead>
+                <% if(posts.length){ %>
+                    <% posts.forEach(post=> {%>
+                        <form action="/cart/shop<%= post.id %>" method="post">
+                            <tr>
+                                <td data-label="Cancel"
+                                    class="text-sm sm:text-lg font-bold border border-[#CCCCCC] text-center">
+                                    <a href="/cart/delete<%= post.id %>"
+                                        class="p-1.5 sm:p-2 text-xs sm:text-sm text-[#AA0101] rounded-md transition-all duration-300 hover:text-white hover:bg-[#AA0101]">
+                                        <i class="fa-solid fa-x"></i>
+                                    </a>
+                                </td>
+                                <td data-label="Product" class="border border-[#CCCCCC]">
+                                    <img src=<%=post.img %> alt="Product" class="w-16 sm:w-24 lg:w-30 mx-auto">
+                                </td>
+                                <td data-label="Name"
+                                    class="text-xs sm:text-md capitalize font-bold border border-[#CCCCCC] text-left">
+                                    <p class="ml-2 sm:ml-4">
+                                        <%= post.productFullName.replaceAll('_'," ") %></p>
+                            </td>
+                            <td data-label=" Price"
+                                            class="text-xs sm:text-sm capitalize border border-[#CCCCCC] text-center">
+                                            <p>$<%= post.price %>
+                                            </p>
+                                </td>
+                                <td data-label="Quantity"
+                                    class="product-qty text-sm sm:text-lg capitalize font-bold border border-[#CCCCCC] text-center py-2">
+                                    <button type="submit"
+                                        class="btn-minus-all px-2 sm:px-3 py-2 sm:py-2.5 text-[#00E281] bg-[#F6F6F6] rounded-full transition-all duration-300 hover:text-[#122E40] hover:bg-[#00E281]">
+                                        <i class="fa-solid fa-minus text-xs sm:text-sm"></i>
+                                    </button>
+                                    <input type="text" min="1" max="99" name="qty" value=<%=post.qty %>
+                                    class="product-all w-12 sm:w-16 lg:w-20 h-8 sm:h-9 text-center text-sm sm:text-base
+                                    font-bold outline-none border border-[#7F7F7F] rounded-full transition-all
+                                    duration-300 focus:border-[#00E281]">
+                                    <button type="submit"
+                                        class="btn-plus-all px-2 sm:px-3 py-2 sm:py-2.5 text-[#00E281] bg-[#F6F6F6] rounded-full transition-all duration-300 hover:text-[#122E40] hover:bg-[#00E281]">
+                                        <i class="fa-solid fa-plus text-xs sm:text-sm"></i>
+                                    </button>
+                                </td>
+                                <td data-label="Subtotal"
+                                    class="text-sm sm:text-md capitalize border border-[#CCCCCC] text-center">
+                                    <p>$<%= (post.price)* (post.qty) %>
+                                    </p>
+                                </td>
+                            </tr>
+                        </form>
+                        <% }) %>
+                            <% } %>
+            </table>
+
+            <!-- Apply Coupon Section -->
+            <div
+                class="w-full max-w-7xl p-3 sm:p-4 border border-[#CCCCCC] flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-2 mt-0">
+                <div class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                    <input type="text" name="cupon" placeholder="Coupon code"
+                        class="w-full sm:w-35 p-2 border border-[#B5F4CD] focus:border-[#00E281] outline-none rounded-full transition-all duration-300 text-sm">
+                    <button type="button"
+                        class="px-5 py-2.5 bg-[#00E281] rounded-full text-sm font-bold transition duration-300 hover:text-[#00E281] hover:bg-[#122E40] whitespace-nowrap">
+                        Apply Coupon
+                    </button>
+                </div>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-2 w-full sm:w-auto">
+                    <a href="/checkout"
+                        class="w-full sm:w-auto text-center px-5 py-2.5 bg-[#00E281] rounded-full text-sm font-bold transition duration-300 hover:text-[#00E281] hover:bg-[#122E40] whitespace-nowrap">
+                        Proceed to checkout
+                    </a>
+                    <a href="/newproduct"
+                        class="w-full sm:w-auto text-center px-5 py-2.5 bg-[#00E281] rounded-full text-sm font-bold transition duration-300 hover:text-[#00E281] hover:bg-[#122E40] whitespace-nowrap">
+                        Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Suggested Products -->
+        <div class="w-full flex flex-col justify-start items-center gap-8 sm:gap-10 px-4 sm:px-6 py-10 mt-6 sm:mt-10">
+            <div
+                class="w-full max-w-7xl bg-[#ECEDF2] rounded-4xl flex flex-col justify-center items-center py-8 px-4 sm:px-6 gap-6">
+                <div class="w-full max-w-3xl h-12 sm:h-15 bg-[#04E181] rounded-full flex justify-center items-center">
+                    <h3 class="text-base sm:text-xl font-bold">You may be interested in ...</h3>
+                </div>
+                <div class="w-full flex justify-center items-center px-2 sm:px-4 lg:px-8 py-4 sm:py-10">
+                    <div
+                        class="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+                        <% cardData.forEach(item=> { %>
+                            <form action="/cart/addToCart" method="post">
+                                <div
+                                    class="group bg-[#FEFEFE] rounded-tl-3xl rounded-br-3xl shadow-md flex flex-col justify-between items-center cursor-pointer relative">
+                                    <div class="w-full flex flex-col justify-around items-start pt-4 pb-2">
+                                        <div class="overflow-hidden ml-4">
+                                            <img class="w-40 sm:w-48 transition-transform group-hover:scale-110 duration-300"
+                                                src=<%=item.img %> alt="product">
+                                            <input type="hidden" name="img" value=<%=item.img %>>
+                                        </div>
+                                        <div
+                                            class="ml-6 mt-3 capitalize group-hover:text-[#00E281] transition-all duration-300">
+                                            <h3 class="text-lg sm:text-xl font-bold">
+                                                <%= item.productName %>
+                                            </h3>
+                                            <input type="hidden" name="productFullName" value=<%=item.productFullName
+                                                %>>
+                                            <h3 class="text-lg sm:text-xl font-bold">
+                                                <%= item.producSecondtName %>
+                                            </h3>
+                                            <span
+                                                class="font-thin text-sm text-[#364C5D] group-hover:text-[#00E281] transition-all duration-300">
+                                                <%= item.productType %>
+                                            </span>
+                                        </div>
+                                        <div class="ml-6 mt-2 flex items-center gap-2">
+                                            <div>
+                                                <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                            </div>
+                                            <span class="text-lg font-medium">$<%= item.price %></span>
+                                            <input type="hidden" name="price" value=<%=item.price %>>
+                                        </div>
+                                    </div>
+                                    <div class="absolute top-4 right-4 flex flex-col items-end gap-2">
+                                        <div class="group/wish flex justify-end items-center gap-2">
+                                            <span
+                                                class="hidden scale-0 px-2 py-1 bg-[#00E281] rounded-full text-xs transition-all duration-200 group-hover/wish:flex group-hover/wish:scale-100 group-hover/wish:text-black whitespace-nowrap">Add
+                                                to wishlist</span>
+                                            <a href="./index.html"
+                                                class="px-2.5 py-2 border border-[#DDDDDD] rounded-full transition-all duration-300 hover:text-[#00E2A1] hover:border-[#00E2A1] text-sm bg-white"><i
+                                                    class="fa-regular fa-heart"></i></a>
+                                        </div>
+                                        <div class="group/compare flex justify-end items-center gap-2">
+                                            <span
+                                                class="opacity-0 px-2 py-1 bg-[#00E281] rounded-full text-xs transition-all duration-200 group-hover/compare:opacity-100 group-hover/compare:text-black whitespace-nowrap">Add
+                                                to compare</span>
+                                            <a href="./index.html"
+                                                class="px-2.5 py-2 border border-[#DDDDDD] rounded-full transition-all duration-300 hover:text-[#00E2A1] hover:border-[#00E2A1] text-sm bg-white"><i
+                                                    class="fa-solid fa-arrow-right-arrow-left"></i></a>
+                                        </div>
+                                        <div class="openPopupBtn group/view flex justify-end items-center gap-2">
+                                            <span
+                                                class="opacity-0 px-2 py-1 bg-[#00E281] rounded-full text-xs transition-all duration-200 group-hover/view:opacity-100 group-hover/view:text-black whitespace-nowrap">Quick
+                                                view</span>
+                                            <button type="button"
+                                                class="px-2.5 py-2 border border-[#DDDDDD] rounded-full transition-all duration-300 hover:text-[#00E2A1] hover:border-[#00E2A1] text-sm bg-white"><i
+                                                    class="fa-solid fa-magnifying-glass"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="popup">
+                                        <div class="popup-box">
+                                            <div class="popupBtn-container">
+                                                <button type="button" class="closePopupBtn"><i
+                                                        class="fa-solid fa-xmark"></i></button>
+                                            </div>
+                                            <div class="popup-container">
+                                                <img src=<%=item.img %> alt="" class="src">
+                                                <div class="content">
+                                                    <div class="mt-10 flex flex-col justify-center items-start gap-2">
+                                                        <h2 class="text-2xl sm:text-4xl font-bold capitalize">
+                                                            <%= item.productName %>
+                                                                <%= item.productSecondName %>
+                                                        </h2>
+                                                        <a href="#" class="text-sm">View full product details <i
+                                                                class="fa-solid fa-arrow-right"></i></a>
+                                                        <div class="flex justify-center items-center gap-1">
+                                                            <span
+                                                                class="px-1.5 border border-[#F1F2F6] rounded-md text-sm">4.5</span>
+                                                            <div class="select-none">
+                                                                <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                                <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                                <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                                <i class="fa-solid fa-star text-[#FFBB00] text-sm"></i>
+                                                                <i
+                                                                    class="fa-solid fa-star-half-stroke text-[#FFBB00] text-sm"></i>
+                                                            </div>
+                                                            <span class="text-sm">(4 Rating)</span>
+                                                        </div>
+                                                        <div
+                                                            class="flex flex-col justify-center items-start gap-4 w-full">
+                                                            <h2 class="text-2xl sm:text-3xl font-bold text-[#00E281]">$
+                                                                <%= item.price %>
+                                                            </h2>
+                                                            <p class="max-h-[100px] overflow-hidden text-sm">
+                                                                Pellentesque habitant morbi tristique senectus et netus
+                                                                et malesuada fames ac turpis egestas. Vestibulum tortor
+                                                                quam, feugiat vitae, ultricies eget, tempor sit amet,
+                                                                ante.</p>
+                                                            <div
+                                                                class="w-full flex flex-col sm:flex-row justify-around items-center gap-3">
+                                                                <div class="flex justify-around items-center gap-2">
+                                                                    <button type="button"
+                                                                        class="btn-minus px-3 py-2.5 text-[#00E281] bg-[#F6F6F6] rounded-full transition-all duration-300 hover:text-[#122E40] hover:bg-[#00E281]"><i
+                                                                            class="fa-solid fa-minus text-sm"></i></button>
+                                                                    <input type="text" min="1" max="99" name="qty"
+                                                                        value="1"
+                                                                        class="product w-20 h-9 text-center text-base font-bold outline-none border border-[#7F7F7F] rounded-full transition-all duration-300 focus:border-[#00E281]">
+                                                                    <button type="button"
+                                                                        class="btn-plus px-3 py-2.5 text-[#00E281] bg-[#F6F6F6] rounded-full transition-all duration-300 hover:text-[#122E40] hover:bg-[#00E281]"><i
+                                                                            class="fa-solid fa-plus text-sm"></i></button>
+                                                                </div>
+                                                                <button type="submit"
+                                                                    class="w-full sm:w-auto px-6 py-2.5 text-sm font-bold bg-[#00E281] rounded-full transition duration-300 hover:text-[#00E281] hover:bg-[#122E40]"><i
+                                                                        class="fa-solid fa-cart-shopping mr-1"></i> Add
+                                                                    to cart</button>
+                                                            </div>
+                                                            <span
+                                                                class="w-full py-3 text-[#777777] bg-[#F6F6F6] text-center rounded-2xl text-sm"><i
+                                                                    class="fa-solid fa-cart-shopping"></i>
+                                                                <strong>1000</strong> people have added this product to
+                                                                their cart</span>
+                                                            <a href="javascript:void(0)"
+                                                                class="group/phone w-full bg-[#F6F6F6] border-2 border-[#F4F4F4] rounded-2xl flex justify-start items-center gap-4 py-4 px-4 transition-all duration-300 hover:border-[#00E281]">
+                                                                <i
+                                                                    class="fa-solid fa-square-phone text-5xl text-[#00E281]"></i>
+                                                                <div class="flex flex-col justify-center items-start">
+                                                                    <p
+                                                                        class="text-xs text-[#C2C2C2] transition-all duration-300 group-hover/phone:text-[#00E281]">
+                                                                        Need help choosing the right product?</p>
+                                                                    <p
+                                                                        class="text-sm font-bold text-[#6A6A6A] transition-all duration-300 group-hover/phone:text-[#00E281]">
+                                                                        Speak to product specialist at 1-312-800-000</p>
+                                                                </div>
+                                                            </a>
+                                                            <hr class="w-full text-[#C2C2C2]">
+                                                            <div
+                                                                class="w-full flex flex-col sm:flex-row justify-around items-start sm:items-center gap-4">
+                                                                <table class="product-table text-sm">
+                                                                    <tr>
+                                                                        <td>Brand</td>
+                                                                        <td>Your Brand Name</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>SKU</td>
+                                                                        <td>SKU_19**</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Status</td>
+                                                                        <td>99 in stock</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Tags</td>
+                                                                        <td>Angus Burgers</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Categories</td>
+                                                                        <td><a href="/">Home</a> <a
+                                                                                href="/newproduct">New Product</a></td>
+                                                                    </tr>
+                                                                </table>
+                                                                <img src="./image/brand-xtra-2.jpg" alt="xtratheme"
+                                                                    class="w-24 h-12 object-contain">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="relative w-full h-10 flex justify-center items-center transition-all duration-300 mb-2">
+                                        <button type="submit"
+                                            class="absolute px-5 py-2.5 text-sm font-bold bg-[#00E281] rounded-full -bottom-5 transition duration-300 lg:opacity-0 group-hover:opacity-100 hover:text-[#00E281] hover:bg-[#122E40] whitespace-nowrap"><i
+                                                class="fa-solid fa-cart-shopping mr-1"></i> Add to cart</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <% }); %>
+                    </div>
+                </div>
+            </div>
+            <!-- Return To NewProduct Page -->
+            <div class="w-full max-w-7xl h-20 flex justify-center items-center">
+                <div class="w-full h-10 flex justify-center items-center transition-all duration-300 mb-2">
+                    <a class="px-6 py-3.5 text-md font-bold bg-[#00E281] rounded-full transition duration-300 hover:text-[#00E281] hover:bg-[#122E40] whitespace-nowrap"
+                        href="/newproduct">Return To Shop</a>
+                </div>
+            </div>
+        </div>
+        <% } %>

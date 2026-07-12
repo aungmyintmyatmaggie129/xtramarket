@@ -1,0 +1,159 @@
+<!-- Shopping Process Section -->
+<div class="w-full py-8 sm:h-50 flex flex-col justify-center items-center select-none px-4">
+    <div class="w-full max-w-4xl flex flex-wrap justify-center sm:justify-around items-center gap-4 sm:gap-2">
+        <div class="flex justify-center items-center gap-2">
+            <span class="visibility-10 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#00E281] flex justify-center items-center text-sm"><i class="fa-solid fa-1"></i></span>
+            <a href="/cart" class="text-xl sm:text-3xl font-md">Shopping cart</a>
+        </div>
+        <i class="fa-solid fa-arrow-right hidden sm:block"></i>
+        <div class="flex justify-center items-center gap-2">
+            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#00E281] flex justify-center items-center text-sm"><i class="fa-solid fa-2"></i></span>
+            <h3 class="text-xl sm:text-3xl font-md">Checkout details</h3>
+        </div>
+        <i class="fa-solid fa-arrow-right hidden sm:block"></i>
+        <div class="flex justify-center items-center gap-2">
+            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#00E281] flex justify-center items-center text-sm"><i class="fa-solid fa-3"></i></span>
+            <h3 class="text-xl sm:text-3xl font-md">Order complete</h3>
+        </div>
+    </div>
+</div>
+
+<!-- Billing Details -->
+<div class="w-full flex justify-center items-center px-4 sm:px-6 pb-10">
+    <div class="w-full max-w-7xl flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-4">
+
+        <!-- Billing Detail Form Section-->
+        <div class="w-full lg:flex-1 bg-[#F1F2F6] rounded-4xl flex flex-col justify-start items-center py-6 px-4 sm:px-6">
+            <div class="w-full max-w-lg h-12 sm:h-15 mt-2 mb-4 bg-[#04E181] rounded-full flex justify-center items-center">
+                <h3 class="text-base sm:text-xl font-bold">Billing Details</h3>
+            </div>
+            <form class="w-full flex flex-col justify-center items-center gap-2 px-2 sm:px-4">
+                <!-- First & Last Name -->
+                <div class="w-full flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
+                    <div class="w-full sm:flex-1 flex flex-col justify-center items-start">
+                        <label for="firstName" class="text-sm capitalize">first name</label>
+                        <input type="text" name="firstName"
+                            class="w-full h-10 my-3 px-5 bg-[#FFFFFF] rounded-full border outline-none border-[#DBFAE7] focus:border-[#04E181]">
+                    </div>
+                    <div class="w-full sm:flex-1 flex flex-col justify-center items-start">
+                        <label for="lastName" class="text-sm capitalize">last name</label>
+                        <input type="text" name="lastName"
+                            class="w-full h-10 my-3 px-5 bg-[#FFFFFF] rounded-full border outline-none border-[#DBFAE7] focus:border-[#04E181]">
+                    </div>
+                </div>
+                <!-- Company Name -->
+                <div class="w-full mt-2 mb-2 flex flex-col justify-center items-start">
+                    <label for="companyName" class="text-sm capitalize">company name(optional)</label>
+                    <input type="text" name="companyName"
+                        class="w-full h-12 my-3 px-5 bg-[#FFFFFF] rounded-full border outline-none border-[#DBFAE7] focus:border-[#04E181]">
+                </div>
+                <!-- Country/Region -->
+                <div class="w-full mt-2 mb-2 flex flex-col justify-center items-start">
+                    <label for="country" class="text-sm capitalize">country / region</label>
+                    <select name="country" id="country"
+                        class="w-full h-12 my-3 px-4 bg-[#FFFFFF] rounded-full border outline-none border-[#DBFAE7] focus:border-[#04E181]">
+                        <% for(let city = 0; city < citys.length; city++){ %>
+                            <option class="w-full h-12 my-3 px-4 bg-[#FFFFFF] rounded-full border outline-none border-[#DBFAE7] focus:border-[#04E181]"
+                                value="<%= citys[city] %>">Myanmar / <%= citys[city] %>
+                            </option>
+                        <% }; %>
+                    </select>
+                </div>
+                <!-- Street Address -->
+                <div class="w-full mt-2 mb-2 flex flex-col justify-center items-start">
+                    <label for="streetAddress" class="text-sm capitalize">street address</label>
+                    <input type="text" name="streetAddress" placeholder="House number and Street name"
+                        class="w-full h-12 my-3 px-5 bg-[#FFFFFF] rounded-full border outline-none border-[#DBFAE7] focus:border-[#04E181]">
+                    <input type="text" name="streetAddress2" placeholder="Apartment, suite, unit, etc. (optional)"
+                        class="w-full h-12 my-3 px-5 bg-[#FFFFFF] rounded-full border outline-none border-[#DBFAE7] focus:border-[#04E181]">
+                </div>
+                <!-- Postal Code -->
+                <div class="w-full mt-2 mb-2 flex flex-col justify-center items-start">
+                    <label for="postalCode" class="text-sm capitalize">postal code</label>
+                    <input type="text" name="postalCode" placeholder="Postal Code"
+                        class="w-full h-12 my-3 px-5 bg-[#FFFFFF] rounded-full border outline-none border-[#DBFAE7] focus:border-[#04E181]">
+                </div>
+                <!-- Phone -->
+                <div class="w-full mt-2 mb-2 flex flex-col justify-center items-start">
+                    <label for="phone" class="text-sm capitalize">phone</label>
+                    <input type="text" name="phone" placeholder="Phone"
+                        class="w-full h-12 my-3 px-5 bg-[#FFFFFF] rounded-full border outline-none border-[#DBFAE7] focus:border-[#04E181]">
+                </div>
+                <!-- Email Address -->
+                <div class="w-full mt-2 mb-2 flex flex-col justify-center items-start">
+                    <label for="email" class="text-sm capitalize">email address</label>
+                    <input type="text" name="email" placeholder="Email Address"
+                        class="w-full h-12 my-3 px-5 bg-[#FFFFFF] rounded-full border outline-none border-[#DBFAE7] focus:border-[#04E181]">
+                </div>
+                <!-- Additional Information -->
+                <div class="w-full mt-2 mb-2 flex flex-col justify-center items-start">
+                    <label for="additionalInfo" class="text-xl sm:text-2xl font-bold capitalize">additional information</label>
+                    <hr class="w-full my-4 sm:my-5 text-[#E2E3E6]">
+                    <label for="orderNote" class="text-sm capitalize">order note (optional)</label>
+                    <textarea name="orderNote"
+                        class="w-full h-28 sm:h-30 my-3 mb-8 sm:mb-20 px-5 py-3 bg-[#FFFFFF] rounded-4xl border outline-none border-[#DBFAE7] focus:border-[#04E181] resize-none"></textarea>
+                </div>
+            </form>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="w-full lg:w-96 xl:w-130 bg-[#F1F2F6] rounded-4xl flex flex-col justify-start items-center py-6 px-4 sm:px-6">
+            <div class="w-full max-w-sm h-12 sm:h-15 mt-2 mb-4 bg-[#04E181] rounded-full flex flex-col justify-center items-center">
+                <h3 class="text-base sm:text-xl font-bold">Your order</h3>
+            </div>
+
+            <!-- Product Table -->
+            <div class="w-full mt-5 mb-4 rounded-2xl overflow-x-auto">
+                <table class="w-full border border-[#CCCCCC] rounded-2xl min-w-[280px]">
+                    <tr class="h-12 sm:h-13 border border-[#CCCCCC] bg-[#E9EAEE]">
+                        <td class="text-sm sm:text-lg pl-3 sm:pl-4 font-bold border border-[#CCCCCC] text-left">Product</td>
+                        <td class="w-32 sm:w-50 text-sm sm:text-lg pl-3 sm:pl-4 font-bold border border-[#CCCCCC] text-left">Sub Total</td>
+                    </tr>
+                    <% let total=0; %>
+                    <% posts.forEach(post=> {%>
+                        <% subtotal=post.price * post.qty; %>
+                        <% total +=subtotal; %>
+                        <tr class="h-12 sm:h-13 border border-[#CCCCCC]">
+                            <td class="text-xs sm:text-sm pl-3 sm:pl-4 border border-[#CCCCCC] text-left capitalize">
+                                <%= post.productFullName.replaceAll("_", " " ) %> <strong> x <%= post.qty %></strong>
+                            </td>
+                            <td class="text-xs sm:text-sm pl-3 sm:pl-4 border border-[#CCCCCC] text-left">
+                                $<%= (post.price) * (post.qty) %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                    <tr class="h-12 sm:h-13 border border-[#CCCCCC]">
+                        <td class="text-xs sm:text-sm pl-3 sm:pl-4 font-bold border border-[#CCCCCC] text-left">Sub total</td>
+                        <td class="text-xs sm:text-sm pl-3 sm:pl-4 font-bold border border-[#CCCCCC] text-left">$<%= total %></td>
+                    </tr>
+                    <tr class="h-12 sm:h-13 border border-[#CCCCCC]">
+                        <td class="text-sm sm:text-lg pl-3 sm:pl-4 font-bold border border-[#CCCCCC] text-left">Total</td>
+                        <td class="text-sm sm:text-lg pl-3 sm:pl-4 font-bold border border-[#CCCCCC] text-left">$<%= total %></td>
+                    </tr>
+                </table>
+
+                <hr class="w-full border border-[#E2E3E6] border-dotted my-4 sm:my-5">
+
+                <!-- Payment Notice -->
+                <div class="my-4 sm:my-5 flex justify-center items-center">
+                    <div class="relative w-full min-h-[200px] sm:h-80 border-2 border-[#E9EAEE] flex justify-center items-center p-4">
+                        <div class="w-full sm:w-sm px-4 sm:px-10 py-6 sm:py-8 bg-[#E9EAEE] rounded-xl flex justify-center items-center">
+                            <p class="text-sm sm:text-lg font-bold text-center">Sorry, it seems that there are no available payment methods. Please contact us if you require assistance or wish to make alternate arrangements.</p>
+                        </div>
+                        <div class="absolute w-12 h-12 sm:w-15 sm:h-15 bg-[#FFFFFF] border-4 sm:border-5 border-[#F6F6F6] rounded-xl top-4 sm:top-10 left-3 sm:left-5 flex justify-center items-center">
+                            <i class="fa-solid fa-clone text-lg sm:text-xl text-[#1F85BE]"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Place Order -->
+                <div class="my-4 sm:my-5 flex justify-center items-center">
+                    <div class="relative w-full py-4 sm:py-5 border-2 border-[#E9EAEE] flex justify-center items-center">
+                        <a class="w-full max-w-xs px-5 py-2 text-sm sm:text-md font-bold text-center bg-[#00E281] rounded-full transition duration-300 hover:text-[#00E281] hover:bg-[#122E40] whitespace-nowrap"
+                            href="/">Place Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

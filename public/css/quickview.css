@@ -1,0 +1,131 @@
+.popup{
+    width: 100%;
+    height: 100vh;
+
+    background-color: #444343c6;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    /* display: none; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup .popup-box{
+    width: 85%;
+    height: 90%;
+    padding-top: 20px;
+    background-color: #FFFFFF;
+    border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+.popup .popup-box .popupBtn-container{
+    width: 100%;
+    height: 30px;
+    /* background-color: red; */
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.popup .popup-box .popupBtn-container button{
+    width: 50px;
+    cursor: pointer;
+}
+
+.popup .popup-box .popup-container{
+    width: 100%;
+    height: 90%;
+    /* background-color: red; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+.popup .popup-box .popup-container img{
+    height: 80%;
+    border: 1px solid #EDFCF2;
+}
+.popup .popup-box .popup-container .content{
+    width: 50%;
+    height: 95%;
+    /* background-color: blue; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center ;
+    align-items: center;
+}
+/* 
+.product-table tr td{
+    width: 120px;
+    background-color: red;
+} */
+
+.product-table tr td:first-child{
+    width: 120px;
+    font-size: 1.12rem;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+/* Mobile vertical table */
+@media (max-width: 639px) {
+
+    .cart-table { 
+        display: block; 
+        width: 100%;
+        min-width: unset;
+    }
+
+    .cart-table thead { display: none; }
+
+    .cart-table tbody,
+    .cart-table tr,
+    .cart-table td,
+    .cart-table form { 
+        display: block; 
+        width: 100%; 
+    }
+
+    .cart-table tr {
+        border: 1px solid #CCCCCC;
+        border-radius: 16px;
+        margin-bottom: 16px;
+        padding: 8px;
+        overflow: hidden;
+    }
+
+    .cart-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px;
+        border: none;
+        border-bottom: 1px solid #f0f0f0;
+        text-align: left !important;
+    }
+
+    .cart-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        font-size: 0.75rem;
+        color: #666;
+        text-transform: uppercase;
+        min-width: 80px;
+    }
+
+    .cart-table td img {
+        margin: 0;
+    }
+}

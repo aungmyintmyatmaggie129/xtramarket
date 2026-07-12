@@ -1,0 +1,17 @@
+/* Mobile menu toggle */
+.no-scroll{
+    overflow: hidden;
+    height: 100vh;
+}
+
+#mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    transform: translateX(100%);
+    transition: transform .4s ease;
+}
+#mobile-menu.open {
+    transform: translateX(0);
+    /* display: flex; */
+}
