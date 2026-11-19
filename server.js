@@ -2,33 +2,24 @@
 
 const express = require('express');
 const app = express();
+require("dotenv").config();
 const mongoose = require('mongoose');
 const Post = require('./model/post');
 const expressLayouts = require('express-ejs-layouts');
+const cors = require('cors');
 const {cardData,citys} = require('./public/js/cardData');
 const {quickviewData,iconData} = require('./public/js/quickviewData.js')
-require("dotenv").config();
+const Router = require('./routes/productRoutes');
 
 
 app.set("views", "./views");
 app.set("view engine", "ejs");
 app.set('layout', './layout/default');
 app.use(express.static('public'));
+app.use(cors());
+app.use(express.json());
 app.use(express.urlencoded({ extends: true }));
 app.use(expressLayouts);
-
-//Connecting MongoDB
-const dbLink = process.env.DBURL
-mongoose.connect(dbLink).then(() => {
-    console.log('db connected...');
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
-        console.log(`server running on port ${PORT} ...`);
-    })
-
-}).catch(e => {
-    console.log('Cannot connect to db.')
-})
 
 app.use((req, res, next) => {
     res.locals.quickviewData = quickviewData;
@@ -91,6 +82,7 @@ app.post('/cart/shop:id', async(req, res) => {
     await Post.findByIdAndUpdate(id, {qty})
     res.redirect('/cart');
 })
+app.use('/api/products', Router)
 
 // This is Checkout Page
 app.get('/checkout', async(req, res) => {
@@ -101,4 +93,18 @@ app.get('/checkout', async(req, res) => {
 
 app.get('/404', (req, res) => {
     res.render('404', {title: "404 Page"});
+})
+
+
+//Connecting MongoDB
+const dbLink = process.env.DBURL
+mongoose.connect(dbLink).then(() => {
+    console.log('db connected...');
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`server running on port ${PORT} ...`);
+    })
+
+}).catch(e => {
+    console.log('Cannot connect to db.')
 })
